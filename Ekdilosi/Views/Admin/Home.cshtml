@@ -1,0 +1,54 @@
+﻿@model Ekdilosi.ViewModel.AdminDataViewModel
+@{
+    ViewBag.Title = "Home";
+}
+
+@if (Session["Admin_Name"] == null)
+{
+    
+    Response.Redirect("/Home");
+}
+
+ <h3>@Session["Admin_Name"], What do you want to do ?</h3>
+    <div class="row" style="margin-top:25px">
+        <div class="col-md-3">
+            <button type="button" class="btn  btn-light" onclick="location.href='@Url.Action("Home","Admin")'">See List of Users</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-light">Remove a User</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-light">Assign Event to a User</button>
+        </div>
+        <div class="col-md-3">
+            <button type="button" class="btn btn-light">Delete Event Of a User</button>
+        </div>
+    </div>
+
+@if(Model.users.Count!=null)
+{
+<table class=" table table-bordered" style="margin-top:30px">
+    <thead>
+    <th scope="col">First Name</th>
+    <th scope="col">Last Name</th>
+    <th scope="col">Email ID</th>
+    <th scope="col">Activity</th>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.users)
+        {
+            <tr>
+                <td>@item.User_Fname</td>
+                <td>@item.User_Lname</td>
+                <td>@item.User_Email</td>
+                <td>
+                    <form method="post" action="@Url.Action("DelUser","Admin", new { item.User_Id})">
+                        <button type="submit" class="btn btn-danger btn-sm" >Delete User</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+}
+

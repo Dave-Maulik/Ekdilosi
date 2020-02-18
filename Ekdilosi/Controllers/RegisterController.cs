@@ -20,7 +20,7 @@ namespace Ekdilosi.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Index(UserDetail user)
+        public ActionResult Index(User user)
         {
             db.UserRegistration(user);
             return RedirectToAction("Index", "Home");

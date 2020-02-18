@@ -9,9 +9,9 @@ namespace Ekdilosi.ViewModel
     {
         public AdminDataViewModel()
         {
-            users = new List<UserDetail>();
+            users = new List<User>();
         }
 
-        public List<UserDetail> users { get; set; }
+        public List<User> users { get; set; }
     }
 }

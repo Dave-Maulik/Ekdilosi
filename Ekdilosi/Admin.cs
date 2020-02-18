@@ -14,9 +14,18 @@ namespace Ekdilosi
     
     public partial class Admin
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Admin()
+        {
+            this.UserEvents = new HashSet<UserEvent>();
+        }
+    
         public int Admin_Id { get; set; }
         public string Admin_Name { get; set; }
         public string Admin_Email { get; set; }
         public string Admin_Password { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserEvent> UserEvents { get; set; }
     }
 }

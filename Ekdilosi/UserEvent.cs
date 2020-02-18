@@ -14,10 +14,13 @@ namespace Ekdilosi
     
     public partial class UserEvent
     {
+        public int Assign_Id { get; set; }
+        public int Admin_Id { get; set; }
         public int User_Id { get; set; }
         public int Event_Id { get; set; }
     
-        public virtual EventDetail EventDetail { get; set; }
-        public virtual UserDetail UserDetail { get; set; }
+        public virtual Admin Admin { get; set; }
+        public virtual Event Event { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -28,6 +28,7 @@ namespace Ekdilosi.Controllers
             if(currentAdminPassword == databaseAdminPassword)
             {
                 Session["Admin_Name"] = db.GetAdminByEmail(admin).Admin_Name;
+                Session["Admin_Id"] = db.GetAdminByEmail(admin).Admin_Id;
                 return RedirectToAction("Home","Admin");
             }
             return View();
@@ -44,6 +45,37 @@ namespace Ekdilosi.Controllers
         {
             db.DeleteUserById(User_Id);
             return RedirectToAction("Home", "Admin");
+        }
+
+        [HttpGet]
+        public ActionResult AddActivity(int User_Id)
+        {
+            TempData["User_Id"] = User_Id;
+            return View();
+
+        }
+        public ActionResult AddActivity(Event detail)
+        {
+            var userID = TempData["User_Id"];
+            var adminID = Session["Admin_ID"];
+            db.AddEvent(detail);
+            //var thisEventID = detail.Event_Id;
+
+            UserEvent AssignMentDetails = new UserEvent();
+            AssignMentDetails.User_Id = (int)userID;
+            AssignMentDetails.Event_Id = detail.Event_Id;
+            AssignMentDetails.Admin_Id = (int)adminID;
+
+            db.AddEventAssignment(AssignMentDetails);
+
+            return RedirectToAction("Home", "Admin");
+
+        }
+        public ActionResult Logout()
+        {
+            Session.Remove("Admin_Name");
+            Session.Remove("Admin_Id");
+            return RedirectToAction("Index","admin");
         }
     }
 }

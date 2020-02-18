@@ -12,17 +12,16 @@ namespace Ekdilosi
     using System;
     using System.Collections.Generic;
     
-    public partial class UserDetail
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserDetail()
+        public User()
         {
             this.UserEvents = new HashSet<UserEvent>();
         }
     
         public int User_Id { get; set; }
-        public string User_Fname { get; set; }
-        public string User_Lname { get; set; }
+        public string User_Name { get; set; }
         public string User_Email { get; set; }
         public string User_Password { get; set; }
     

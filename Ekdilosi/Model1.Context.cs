@@ -13,10 +13,10 @@ namespace Ekdilosi
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class EkdilosiContext : DbContext
+    public partial class EkdiloshiEntities : DbContext
     {
-        public EkdilosiContext()
-            : base("name=EkdilosiContext")
+        public EkdiloshiEntities()
+            : base("name=EkdiloshiEntities")
         {
         }
     
@@ -25,9 +25,9 @@ namespace Ekdilosi
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<EventDetail> EventDetails { get; set; }
-        public virtual DbSet<UserDetail> UserDetails { get; set; }
-        public virtual DbSet<UserEvent> UserEvents { get; set; }
         public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Event> Events { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserEvent> UserEvents { get; set; }
     }
 }

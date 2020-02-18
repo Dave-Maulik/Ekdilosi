@@ -21,14 +21,15 @@ namespace Ekdilosi.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(UserDetail user)
+        public ActionResult Index(User user)
         {
             var currentUserPassword = user.User_Password;
             var databaseUserPassword = db.GetUserByEmail(user).User_Password;
             if(currentUserPassword == databaseUserPassword)
             {
-                Session["UserName"] = db.GetUserByEmail(user).User_Fname;
-                return RedirectToAction("Index", "Home");
+                Session["UserName"] = db.GetUserByEmail(user).User_Name;
+                Session["User_Id"] = db.GetUserByEmail(user).User_Id;
+                return RedirectToAction("Index", "UserD");
             }
             return View();
         }

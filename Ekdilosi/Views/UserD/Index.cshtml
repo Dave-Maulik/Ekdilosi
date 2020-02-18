@@ -1,0 +1,30 @@
+﻿@model IEnumerable<UserEvent>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@Session["UserName"] Welcome.</h2>
+
+@foreach (var item in Model)
+{
+<div class="panel panel-success">
+    <div class="panel-heading">
+        <h3 class="panel-title">@item.Event.Event_Name</h3>
+    </div>
+    <div class="panel-body">
+        @item.Event.Event_Discription
+    </div>
+    <blockquote>-Assigned By <cite>@item.Admin.Admin_Name</cite></blockquote>
+</div>
+}
+
+
+<div class="row">
+    <div class="col-md-4">
+        <button type="button" class="btn btn-danger" onclick="location.href='@Url.Action("userlogOut","UserD")'">Log out</button>
+    </div>
+
+</div>
+
+
+

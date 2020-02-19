@@ -25,11 +25,11 @@ namespace Ekdilosi.Controllers
         {
             var currentAdminPassword = admin.Admin_Password;
             var databaseAdminPassword = db.GetAdminByEmail(admin).Admin_Password;
-            if(currentAdminPassword == databaseAdminPassword)
+            if (currentAdminPassword == databaseAdminPassword)
             {
                 Session["Admin_Name"] = db.GetAdminByEmail(admin).Admin_Name;
                 Session["Admin_Id"] = db.GetAdminByEmail(admin).Admin_Id;
-                return RedirectToAction("Home","Admin");
+                return RedirectToAction("Home", "Admin");
             }
             return View();
         }
@@ -38,7 +38,7 @@ namespace Ekdilosi.Controllers
         {
             AdminDataViewModel adminData = new AdminDataViewModel();
             adminData.users = db.GetAllUsers();
-            return  View(adminData);
+            return View(adminData);
         }
 
         public ActionResult DelUser(int User_Id)
@@ -52,7 +52,6 @@ namespace Ekdilosi.Controllers
         {
             TempData["User_Id"] = User_Id;
             return View();
-
         }
         public ActionResult AddActivity(Event detail)
         {
@@ -75,7 +74,33 @@ namespace Ekdilosi.Controllers
         {
             Session.Remove("Admin_Name");
             Session.Remove("Admin_Id");
-            return RedirectToAction("Index","admin");
+            return RedirectToAction("Index", "admin");
         }
-    }
+
+        public ActionResult SeeActivity(int User_Id)
+        {
+            var result = db.GetEventsById(User_Id);
+            return View(result);
+        }
+
+        public ActionResult DeleteUserEvent(int Event_Id)
+        {
+            db.DeleteUserEventByAdmin(Event_Id);
+            return RedirectToAction("Home", "Admin");
+        }
+
+        [HttpGet]
+        public ActionResult EditEvent(int Event_Id)
+        {
+            var result = db.GetPerticularEventById(Event_Id);
+            return View(result);
+        }
+        [HttpPost]
+        public ActionResult EditEvent(Event sevent)
+        {
+            db.AddEdited(sevent);
+            return RedirectToAction("Home","Admin");
+        }
+        
+      }    
 }

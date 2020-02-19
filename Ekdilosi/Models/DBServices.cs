@@ -44,12 +44,28 @@ namespace Ekdilosi.Models
 
         public void DeleteUserById(int id)
         {
-            using (context = new EkdiloshiEntities())
-            {
-                var delq = context.Users.FirstOrDefault(u => u.User_Id == id);
-                context.Users.Remove(delq);
-                context.SaveChanges();
-            }
+            context = new EkdiloshiEntities();
+            
+                //Also havt to delete the user from Userevent & also delete the ref in events 
+                //which assigned to that user.
+                var inUsereventDelete = context.UserEvents.Where(u => u.User_Id == id);
+                List<UserEvent> listToDeleteREcords = new List<UserEvent>();
+                listToDeleteREcords = inUsereventDelete.ToList();
+                
+                var delcount = listToDeleteREcords.Count();
+                foreach(var item in listToDeleteREcords)
+                {
+                    
+                    var eveId = item.Event.Event_Id;
+                    var Remove = context.Events.Where(e=>e.Event_Id==eveId);
+                    context.Events.RemoveRange(Remove);
+                }
+            context.UserEvents.RemoveRange(inUsereventDelete);
+            context.SaveChanges();
+            var delq = context.Users.FirstOrDefault(u => u.User_Id == id);
+            context.Users.Remove(delq);
+            context.SaveChanges();
+                
         }
 
         internal void AddEvent(Event detail)
@@ -72,11 +88,37 @@ namespace Ekdilosi.Models
 
         public IEnumerable<UserEvent> GetEventsById(int id)
         {
-            context = new EkdiloshiEntities();
-            
-                 var r=context.UserEvents.Where(x=>x.User.User_Id==id).Select(x=>x.User).ToList();
+                context = new EkdiloshiEntities();
+                //var r=context.UserEvents.Where(x=>x.User.User_Id==id).Select(x=>x.User).ToList();
                 var resu = context.UserEvents.Where(u => u.User_Id == id).ToList();
                 return resu;
+            
+        }
+
+        internal Event GetPerticularEventById(int event_Id)
+        {
+            context = new EkdiloshiEntities();
+            var result = context.Events.Where(e => e.Event_Id == event_Id).Single();
+            return result;
+        }
+
+        public void AddEdited(Event eve)
+        {
+            context = new EkdiloshiEntities();
+            context.Entry(eve).State = System.Data.Entity.EntityState.Modified;
+            context.SaveChanges();
+            
+
+        }
+
+        public void  DeleteUserEventByAdmin(int eventId)
+        {
+            context = new EkdiloshiEntities();
+            var DeleteUserEvent = context.UserEvents.Where(u => u.Event_Id == eventId);
+            var DelEvent = context.Events.Where(e => e.Event_Id == eventId);
+            context.UserEvents.RemoveRange(DeleteUserEvent);
+            context.Events.RemoveRange(DelEvent);
+            context.SaveChanges();
             
         }
     }

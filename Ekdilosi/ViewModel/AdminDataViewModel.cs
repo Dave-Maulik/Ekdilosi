@@ -13,5 +13,6 @@ namespace Ekdilosi.ViewModel
         }
 
         public List<User> users { get; set; }
+
     }
 }

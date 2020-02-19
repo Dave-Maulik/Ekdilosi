@@ -1,0 +1,33 @@
+﻿@model IEnumerable<UserEvent>
+@{
+    ViewBag.Title = "SeeActivity";
+}
+
+@if (Session["Admin_Name"] == null)
+{
+
+    Response.Redirect("/Home");
+}
+<div class="row">
+    
+
+@foreach (var item in Model)
+{
+    <div class="col-md-8">
+        <div class="panel panel-success" style="margin-top:30px">
+            <div class="panel-heading">
+                <h3 class="panel-title">Heading : @item.Event.Event_Name</h3>
+            </div>
+            <div class="panel-body">
+                <blockquote>@item.Event.Event_Discription <br /><p style="font-size:15px">-Assigned By <cite class="text-muted">@item.Admin.Admin_Name</cite></p></blockquote>
+            </div>
+            
+            <button class="btn btn-success btn-sm" style="margin-bottom:10px; margin-left:10px" onclick="location.href='@Url.Action("EditEvent","Admin",new { item.Event_Id })'">Edit</button>
+            <button class="btn btn-danger btn-sm" style="margin-bottom:10px; margin-left:10px" onclick="location.href='@Url.Action("DeleteUserEvent","Admin",new {item.Event_Id})'">Delete</button>
+        </div>
+    </div>
+}
+
+</div>
+
+

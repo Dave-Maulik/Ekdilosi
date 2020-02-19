@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "EditEvent";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
 @if (Session["Admin_Name"] == null)
@@ -43,6 +44,10 @@
             </div>
         </div>
     </div>
+}
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval");
 }
 
 

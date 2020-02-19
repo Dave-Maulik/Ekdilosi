@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<UserEvent>
 @{
     ViewBag.Title = "SeeActivity";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
 @if (Session["Admin_Name"] == null)
@@ -8,24 +9,31 @@
 
     Response.Redirect("/Home");
 }
-<div class="row">
-    
+    <div class="container">
 
-@foreach (var item in Model)
-{
-    <div class="col-md-8">
-        <div class="panel panel-success" style="margin-top:30px">
-            <div class="panel-heading">
-                <h3 class="panel-title">Heading : @item.Event.Event_Name</h3>
+
+        @foreach (var item in Model)
+        {
+            <div class="row" style="margin-top:15px">
+                <div class="col-6">
+                    <div class="card card-title card border-primary">
+                        <div class="card-header">
+                            Task Heading : @item.Event.Event_Name
+                        </div>
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>@item.Event.Event_Discription</p>
+                                <footer class="blockquote-footer">Asigned by<cite title="Source Title">@item.Admin.Admin_Name</cite></footer>
+                                <div class="mt-4">
+                                <button type="button" class="card-link btn btn-success" style="margin-bottom:10px; margin-left:10px" onclick="location.href='@Url.Action("EditEvent","Admin",new { item.Event_Id })'">Edit</button>
+                                <button type="button" class="card-link  btn btn-danger" style="margin-bottom:10px; margin-left:10px" onclick="location.href='@Url.Action("DeleteUserEvent","Admin",new {item.Event_Id})'">Delete</button>
+                                </div>
+                            </blockquote>
+                        </div>
+                        
+                    </div>
+                </div>
             </div>
-            <div class="panel-body">
-                <blockquote>@item.Event.Event_Discription <br /><p style="font-size:15px">-Assigned By <cite class="text-muted">@item.Admin.Admin_Name</cite></p></blockquote>
-            </div>
-            
-            <button class="btn btn-success btn-sm" style="margin-bottom:10px; margin-left:10px" onclick="location.href='@Url.Action("EditEvent","Admin",new { item.Event_Id })'">Edit</button>
-            <button class="btn btn-danger btn-sm" style="margin-bottom:10px; margin-left:10px" onclick="location.href='@Url.Action("DeleteUserEvent","Admin",new {item.Event_Id})'">Delete</button>
-        </div>
-    </div>
 }
 
 </div>

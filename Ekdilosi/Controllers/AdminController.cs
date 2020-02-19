@@ -99,6 +99,7 @@ namespace Ekdilosi.Controllers
         public ActionResult EditEvent(Event sevent)
         {
             db.AddEdited(sevent);
+            TempData["Message"] = "Event Sucess Fully Updated";
             return RedirectToAction("Home","Admin");
         }
         

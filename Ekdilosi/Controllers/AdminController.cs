@@ -48,7 +48,7 @@ namespace Ekdilosi.Controllers
         }
 
         [HttpGet]
-        public ActionResult AddActivity(int User_Id)
+        public ActionResult AddActivity(int? User_Id)
         {
             TempData["User_Id"] = User_Id;
             return View();

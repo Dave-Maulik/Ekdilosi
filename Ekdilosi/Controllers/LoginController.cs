@@ -8,7 +8,7 @@ using System.Web.Mvc;
 namespace Ekdilosi.Controllers
 {
     public class LoginController : Controller
-    {
+    { 
         DBServices db;
         public LoginController()
         {
@@ -17,6 +17,12 @@ namespace Ekdilosi.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if(Session["UserName"]!=null)
+            {
+                TempData["Loggedin"] = "You are Already Logged in";
+                return RedirectToAction("Index","UserD");
+            }
+            
             return View();
         }
 

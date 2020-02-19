@@ -3,6 +3,11 @@
     ViewBag.Title = "Index";
 }
 
+@if(Session["UserName"]!=null)
+{
+    Response.Redirect("/UserD/Index");
+}
+
     <div class="row">
         <div class="col-md-4 col-md-offset-4" style="margin-top:80px">
             <h2 class="text-center">LogIn</h2>
@@ -23,3 +28,8 @@
             </form>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <a href="/Register">Not a User? Register Yourself</a>
+        </div>
+</div>

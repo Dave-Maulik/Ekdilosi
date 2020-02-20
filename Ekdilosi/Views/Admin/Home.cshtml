@@ -1,4 +1,6 @@
-﻿@model Ekdilosi.ViewModel.AdminDataViewModel
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<Ekdilosi.User>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
@@ -7,24 +9,39 @@
 @if (Session["Admin_Name"] == null)
 {
 
-    Response.Redirect("/Home");
+    Response.Redirect("/admin");
 }
 
 <div class="container">
     <div class="row">
         <div class="col-lg-6">
             <h3>@Session["Admin_Name"], What do you want to do ?</h3>
-            <div class="row" style="margin-top:25px">
+        </div>
 
-            </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <form class="mt-2 mb-4" method="Get"  onsubmit="location.href='@Url.Action("Home","Admin")'">
+                 <label for="SearchFunction">Search User</label>
+                <input type="text" name="Search" id="SearchFunction" class="form-control" placeholder="First name">
+                <button class="form-control btn btn-primary mt-2" type="submit">Search</button>
+            </form>
         </div>
 
     </div>
 </div>
 
+@if(Model.Count == 0)
+            {
+<div class="container">
 
-
-@if (Model.users.Count != null)
+    <p class="text-danger">@TempData["NoUserinit"]</p>
+</div>
+        
+}
+else
 {
     <div class="container">
         <div class="row">
@@ -37,10 +54,10 @@
                         <th scope="col">Activity</th>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.users)
+                            @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>@item.User_Name</td>
+                                    <td>@item.User_Name.</td>
                                     <td>@item.User_Email</td>
                                     <td>
                                         <button class="btn btn-danger btn-group-lg" onclick="location.href='@Url.Action("DelUser","Admin", new { item.User_Id})'">Delete User</button>
@@ -55,8 +72,17 @@
             </div>
         </div>
     </div>
-
 }
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-lg-3">
+           <div class="pagination" style="margin-left:400px;">
+            @Html.PagedListPager(Model, Page => Url.Action("Home", "Admin", new { Page }))
+               </div>
+        </div>
+    </div>
+</div>
 
 
 

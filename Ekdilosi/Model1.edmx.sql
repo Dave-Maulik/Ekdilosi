@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/19/2020 23:08:19
--- Generated from EDMX file: C:\Users\mauli\source\repos\Ekdilosi\Ekdilosi\Model1.edmx
+-- Date Created: 02/20/2020 10:20:05
+-- Generated from EDMX file: C:\Users\maulik.dave\source\repos\Ekdilosi\Ekdilosi\Model1.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -31,14 +31,14 @@ GO
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Admin]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Admin];
+IF OBJECT_ID(N'[dbo].[Admins]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Admins];
 GO
-IF OBJECT_ID(N'[dbo].[Event]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Event];
+IF OBJECT_ID(N'[dbo].[Events]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Events];
 GO
-IF OBJECT_ID(N'[dbo].[User]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[User];
+IF OBJECT_ID(N'[dbo].[Users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Users];
 GO
 IF OBJECT_ID(N'[dbo].[UserEvents]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserEvents];

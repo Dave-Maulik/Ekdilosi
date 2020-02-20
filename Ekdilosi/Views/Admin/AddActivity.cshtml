@@ -8,25 +8,27 @@
 @if (Session["Admin_Name"] == null)
 {
 
-    Response.Redirect("/Home");
+    Response.Redirect("/admin");
 }
 
-
-<div class="row">
-    <div class="col-md-4 col-md-4" style="margin-top:20px">
-        <h2>Enter event Details to </h2>
-        <form method="post" action="@Url.Action("AddActivity","Admin")">
-            <div class="form-group">
-                <label for="EventName">Name of event</label>
-                <input type="text" name="Event_Name" class="form-control" id="EventName" placeholder="Event Name" />
-            </div>
-            <div class="form-group">
-                <label for="eventdisc">Discription</label>
-                <textarea id="eventdisc" name="Event_Discription" class="form-control" placeholder="Discription of Event"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary">Add Event</button>
-            </div>
-        </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-4" style="margin-top:20px">
+            <h2>Enter event Details</h2>
+            <form method="post" action="@Url.Action("AddActivity","Admin")">
+                <div class="form-group">
+                    <label for="EventName">Name of event</label>
+                    <input type="text" name="Event_Name" class="form-control" id="EventName" placeholder="Event Name" />
+                </div>
+                <div class="form-group">
+                    <label for="eventdisc">Discription</label>
+                    <textarea id="eventdisc" name="Event_Discription" class="form-control" placeholder="Discription of Event"></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Add Event</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+

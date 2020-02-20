@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ekdilosi.Controllers
 {
@@ -18,11 +20,13 @@ namespace Ekdilosi.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            Session.Remove("UserName");
             return View();
         }
         [HttpPost]
         public ActionResult Index(Admin admin)
         {
+
             var currentAdminPassword = admin.Admin_Password;
             var databaseAdminPassword = db.GetAdminByEmail(admin).Admin_Password;
             if (currentAdminPassword == databaseAdminPassword)
@@ -34,11 +38,24 @@ namespace Ekdilosi.Controllers
             return View();
         }
 
-        public ActionResult Home()
+        public ActionResult Home(string Search,int? Page)
         {
-            AdminDataViewModel adminData = new AdminDataViewModel();
-            adminData.users = db.GetAllUsers();
-            return View(adminData);
+            TempData["NoUserinit"] = "No User Whose initial is " + "\""+Search +"\"";
+            if(Search == null)
+            {
+                //AdminDataViewModel adminData = new AdminDataViewModel();
+                //adminData.users = db.GetAllUsers();
+                List<User> users = new List<User>();
+                users = db.GetAllUsers();
+                return View(users.ToPagedList(Page ?? 1,4));
+            }
+            else
+            {
+                List<User> users = new List<User>();
+                users = db.GetUserByInitials(Search);
+                return View(users.ToPagedList(Page ?? 1,4));
+            }
+
         }
 
         public ActionResult DelUser(int User_Id)

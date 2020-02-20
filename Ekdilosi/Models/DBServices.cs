@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList;
+using PagedList.Mvc;
 
 namespace Ekdilosi.Models
 {
@@ -39,6 +41,14 @@ namespace Ekdilosi.Models
             using (context = new EkdiloshiEntities())
             {
                 return context.Users.ToList();
+            }
+        }
+
+        public List<User> GetUserByInitials(string SearchVal)
+        {
+            using (context = new EkdiloshiEntities())
+            {
+                return context.Users.Where(u => u.User_Name.StartsWith(SearchVal)).ToList();
             }
         }
 
@@ -118,8 +128,10 @@ namespace Ekdilosi.Models
             var DelEvent = context.Events.Where(e => e.Event_Id == eventId);
             context.UserEvents.RemoveRange(DeleteUserEvent);
             context.Events.RemoveRange(DelEvent);
-            context.SaveChanges();
+            context.SaveChanges(); 
             
         }
+
+        
     }
 }

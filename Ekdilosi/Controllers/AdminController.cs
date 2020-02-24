@@ -12,6 +12,7 @@ namespace Ekdilosi.Controllers
 {
     public class AdminController : Controller
     {
+       
         DBServices db;
         public AdminController()
         {
@@ -37,24 +38,34 @@ namespace Ekdilosi.Controllers
             }
             return View();
         }
-
-        public ActionResult Home(string Search,int? Page)
+        
+        public ActionResult Home(string Search,int? Page,string SortBy)
         {
+            
+            ViewBag.SortByNameString = string.IsNullOrEmpty(SortBy) ? "Name" : "";
             TempData["NoUserinit"] = "No User Whose initial is " + "\""+Search +"\"";
-            if(Search == null)
+           
+            List<User> users = new List<User>();
+          
+             if (Search == null)
             {
-                //AdminDataViewModel adminData = new AdminDataViewModel();
-                //adminData.users = db.GetAllUsers();
-                List<User> users = new List<User>();
-                users = db.GetAllUsers();
-                return View(users.ToPagedList(Page ?? 1,4));
+                if(SortBy == "Name")
+                {
+                    users = db.GetUserDeceByName();
+                    return View(users.ToPagedList(Page ?? 1, 8));
+                }
+                else
+                {
+                    users = db.GetAllUsers();
+                    return View(users.ToPagedList(Page ?? 1, 4));
+                }
             }
-            else
+            else 
             {
-                List<User> users = new List<User>();
                 users = db.GetUserByInitials(Search);
-                return View(users.ToPagedList(Page ?? 1,4));
+                return View(users.ToPagedList(Page ?? 1, 4));
             }
+
 
         }
 

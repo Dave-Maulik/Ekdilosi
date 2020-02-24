@@ -23,7 +23,8 @@ namespace Ekdilosi
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap-litra.css"
+                      "~/Content/bootstrap-litra.css",
+                      "~/Content/Site.css"
                      ));
         }
     }

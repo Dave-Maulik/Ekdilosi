@@ -23,18 +23,18 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <form class="mt-2 mb-4" method="Get"  onsubmit="location.href='@Url.Action("Home","Admin")'">
-                 <label for="SearchFunction">Search User</label>
+            <form class="mt-2 mb-4" method="get"  onsubmit="location.href='@Url.Action("Home","Admin")'">
+                <label for="SearchFunction">Search User</label>
                 <input type="text" name="Search" id="SearchFunction" class="form-control" placeholder="First name">
                 <button class="form-control btn btn-primary mt-2" type="submit">Search</button>
             </form>
         </div>
-
     </div>
 </div>
 
+
 @if(Model.Count == 0)
-            {
+{
 <div class="container">
 
     <p class="text-danger">@TempData["NoUserinit"]</p>
@@ -49,7 +49,7 @@ else
                 <div class="table-responsive table-light">
                     <table class="table table-bordered">
                         <thead>
-                        <th scope="col">First Name</th>
+                        <th scope="col">@Html.ActionLink("First Name", "Home", new {SortBy = "Name"})</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">Activity</th>
                         </thead>
@@ -77,9 +77,9 @@ else
 <div class="container">
     <div class="row mt-3">
         <div class="col-lg-3">
-           <div class="pagination" style="margin-left:400px;">
-            @Html.PagedListPager(Model, Page => Url.Action("Home", "Admin", new { Page }))
-               </div>
+           <div class="pagination">
+            @Html.PagedListPager(Model, Page => Url.Action("Home", "Admin", new { Page, Search = Request.QueryString["Search"] as string, SortBy = Request.QueryString["SortBy"] as string }))
+           </div>
         </div>
     </div>
 </div>
@@ -96,5 +96,5 @@ else
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval");
-}
+    }
 

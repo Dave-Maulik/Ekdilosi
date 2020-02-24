@@ -52,18 +52,18 @@ namespace Ekdilosi.Controllers
                 if(SortBy == "Name")
                 {
                     users = db.GetUserDeceByName();
-                    return View(users.ToPagedList(Page ?? 1, 8));
+                    return View(users.ToPagedList(Page ?? 1, 6));
                 }
                 else
                 {
                     users = db.GetAllUsers();
-                    return View(users.ToPagedList(Page ?? 1, 4));
+                    return View(users.ToPagedList(Page ?? 1, 6));
                 }
             }
             else 
             {
                 users = db.GetUserByInitials(Search);
-                return View(users.ToPagedList(Page ?? 1, 4));
+                return View(users.ToPagedList(Page ?? 1, 6));
             }
 
 

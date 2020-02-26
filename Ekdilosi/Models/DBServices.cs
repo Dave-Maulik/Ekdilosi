@@ -123,14 +123,12 @@ namespace Ekdilosi.Models
 
         public void  DeleteUserEventByAdmin(int eventId)
         {
-
             context = new EkdiloshiEntities();
             var DeleteUserEvent = context.UserEvents.Where(u => u.Event_Id == eventId);
             var DelEvent = context.Events.Where(e => e.Event_Id == eventId);
             context.UserEvents.RemoveRange(DeleteUserEvent);
             context.Events.RemoveRange(DelEvent);
             context.SaveChanges();
-       
         }
 
         public List<User> GetUserDeceByName()
@@ -139,9 +137,5 @@ namespace Ekdilosi.Models
             return context.Users.OrderByDescending(x => x.User_Name).ToList();
 
         }
-
-
-
-        
     }
 }

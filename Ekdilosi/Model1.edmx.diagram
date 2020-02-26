@@ -7,7 +7,7 @@
       <Diagram DiagramId="88890ea9763a4e65ab492e80f9399a7f" Name="Diagram1">
         <EntityTypeShape EntityType="EkdiloshiModel.Admin" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="EkdiloshiModel.Event" Width="1.5" PointX="0.625" PointY="3.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="EkdiloshiModel.User" Width="1.5" PointX="5.625" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EkdiloshiModel.User" Width="1.5" PointX="6.375" PointY="2.25" IsExpanded="true" />
         <EntityTypeShape EntityType="EkdiloshiModel.UserEvent" Width="1.5" PointX="3.375" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="EkdiloshiModel.FK_UserEvents_Admin" ManuallyRouted="false" />
         <AssociationConnector Association="EkdiloshiModel.FK_UserEvents_Event" ManuallyRouted="false" />

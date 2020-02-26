@@ -52,7 +52,7 @@ namespace Ekdilosi.Controllers
                 if(SortBy == "Name")
                 {
                     users = db.GetUserDeceByName();
-                    return View(users.ToPagedList(Page ?? 1, 6));
+                    return PartialView("_userPartial",users.ToPagedList(Page ?? 1, 6));
                 }
                 else
                 {
@@ -63,7 +63,7 @@ namespace Ekdilosi.Controllers
             else 
             {
                 users = db.GetUserByInitials(Search);
-                return View(users.ToPagedList(Page ?? 1, 6));
+                return PartialView("_userPartial",users.ToPagedList(Page ?? 1, 6));
             }
 
 

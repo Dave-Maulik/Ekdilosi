@@ -1,4 +1,4 @@
-﻿@{ 
+﻿@{
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 <div class="container" style="justify-content:center">
@@ -22,3 +22,15 @@
         </div>
     </div>
 </div>
+@if (TempData["AdminLoginErr"] != null)
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 offset-4">
+
+                <p class="text-danger">@TempData["AdminLoginErr"]</p>
+
+            </div>
+        </div>
+    </div>
+}

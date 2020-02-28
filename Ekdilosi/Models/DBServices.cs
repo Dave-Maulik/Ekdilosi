@@ -137,5 +137,11 @@ namespace Ekdilosi.Models
             return context.Users.OrderByDescending(x => x.User_Name).ToList();
 
         }
+
+        public List<string> forJsonAutoComplete(string term)
+        {
+            context = new EkdiloshiEntities();
+            return context.Users.Where(u => u.User_Name.StartsWith(term)).Select(u => u.User_Name).ToList();
+        }
     }
 }

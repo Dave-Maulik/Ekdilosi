@@ -36,6 +36,10 @@ namespace Ekdilosi.Controllers
                 Session["Admin_Id"] = db.GetAdminByEmail(admin).Admin_Id;
                 return RedirectToAction("Home", "Admin");
             }
+            else
+            {
+                TempData["AdminLoginErr"] = "Not Correct Admin Cradentials";
+            }
             return View();
         }
         
@@ -65,8 +69,20 @@ namespace Ekdilosi.Controllers
                 users = db.GetUserByInitials(Search);
                 return PartialView("_userPartial",users.ToPagedList(Page ?? 1, 6));
             }
+        }
 
-
+        public ActionResult IndexAsJson(string term)
+        {
+            if(term==null)
+            {
+                return Content("123");
+            }
+            else
+            {
+                List<string> list = db.forJsonAutoComplete(term);
+                return Json(list, JsonRequestBehavior.AllowGet);
+            }
+            
         }
 
         public ActionResult DelUser(int User_Id)
